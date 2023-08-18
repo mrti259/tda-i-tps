@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "grafo-bipartito"
+version = "0.1.0"
+description = ""
+authors = ["Borja Garibotti <mgaribotti@fi.uba.ar>"]
+readme = "README.md"
+packages = [{include = "grafo_bipartito"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+pytest = "^7.4.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
