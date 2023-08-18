@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "alumno-mas-bajo"
+version = "0.1.0"
+description = ""
+authors = ["Borja Garibotti <mgaribotti@fi.uba.ar>"]
+readme = "README.md"
+packages = [{include = "alumno_mas_bajo"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
