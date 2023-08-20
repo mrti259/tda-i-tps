@@ -49,3 +49,11 @@ def test_10_validar_mas_bajo_con_alumnos_decreciente_creciente_en_2():
 def test_11_validar_mas_bajo_con_alumnos_creciente_en_0():
     alumnos = [daisy, carl, bob, alice ]
     assert validar_mas_bajo(alumnos, 0)
+
+def test_11_validar_mas_bajo_con_alumnos_con_misma_altura():
+    alumnos = [alice, alice, alice]
+    assert not validar_mas_bajo(alumnos, 1)
+
+def test_12_validar_mas_bajo_con_alumnos_con_misma_altura():
+    alumnos = [alice, alice, alice]
+    assert validar_mas_bajo(alumnos, 0)
