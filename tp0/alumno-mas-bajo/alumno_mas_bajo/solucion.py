@@ -31,7 +31,7 @@ def indice_mas_bajo(alumnos):
     return _indice_mas_bajo_rec(alumnos, 0, cantidad)
 
 def _indice_mas_bajo_rec(alumnos, inicial, final):
-    cantidad = len(alumnos[inicial:final])
+    cantidad = final - inicial
 
     if cantidad == 1:
         return inicial
