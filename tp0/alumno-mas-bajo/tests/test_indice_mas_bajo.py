@@ -39,3 +39,9 @@ def test_8_carga():
     alumnos = [Alumno(nombre, altura) for altura in range(20, 100001)][::-1]
     alumnos += [Alumno(nombre, altura) for altura in range(21, 200000)]
     assert indice_mas_bajo(alumnos) == 99980
+
+def test_9_carga():
+    nombre = ""
+    alumnos = [Alumno(nombre, 1) for _ in range(0, 100001)]
+    alumnos += [Alumno(nombre, 0.9) for _ in range(0, 100)]
+    assert indice_mas_bajo(alumnos) == 100001
