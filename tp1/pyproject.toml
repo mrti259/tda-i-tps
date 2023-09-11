@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "tp1"
+version = "0.1.0"
+description = ""
+authors = ["Borja Garibotti <mgaribotti@fi.uba.ar>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+pytest = "^7.4.2"
+
+
+[tool.poetry.group.dev.dependencies]
+jupyter = "^1.0.0"
+pandas = "^2.1.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
