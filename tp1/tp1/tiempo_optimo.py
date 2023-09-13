@@ -1,14 +1,18 @@
-def tiempo_optimo(datos):
-    tiempo_maximo = 0
-    tiempo_inicial = 0
+def tiempo_optimo(tiempos_analisis):
+    tiempo_fin_maximo = 0
+    tiempo_actual = 0
 
-    datos = sorted(datos, key=lambda x: x[1], reverse=True)
+    tiempos_analisis = sorted(tiempos_analisis, key=lambda analisis: analisis[1], reverse=True)
 
-    for (s_i, a_i) in datos:
-        tiempo_actual = tiempo_inicial + s_i + a_i
-        tiempo_inicial += s_i
+    for (tiempo_scaloni, tiempo_ayudante) in tiempos_analisis:
+        # Scaloni ve el video
+        tiempo_actual += tiempo_scaloni
 
-        if tiempo_actual > tiempo_maximo:
-            tiempo_maximo = tiempo_actual
-    
-    return tiempo_maximo
+        # Cuando estaria terminado el analisis de este contricante
+        tiempo_fin_analisis_actual = tiempo_actual + tiempo_ayudante
+
+        # Si va a ser el ultimo en terminar de analizarse me lo guardo
+        if tiempo_fin_analisis_actual > tiempo_fin_maximo:
+            tiempo_fin_maximo = tiempo_fin_analisis_actual  
+
+    return tiempo_fin_maximo

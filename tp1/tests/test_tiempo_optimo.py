@@ -41,10 +41,10 @@ def test_6():
 
 def test_archivos():
     ejemplos = [
-        ("data/3 elem.txt", 10),
-        ("data/10 elem.txt", 29),
-        ("data/100 elem.txt", 5223),
-        ("data/10000 elem.txt", 497886735),
+        ("data_enunciado/3 elem.txt", 10),
+        ("data_enunciado/10 elem.txt", 29),
+        ("data_enunciado/100 elem.txt", 5223),
+        ("data_enunciado/10000 elem.txt", 497886735),
     ]
     for path, optimo in ejemplos:
         datos = leer_archivo(path)

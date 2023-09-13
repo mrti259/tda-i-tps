@@ -6,8 +6,10 @@ authors = ["Borja Garibotti <mgaribotti@fi.uba.ar>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "^3.10"
 pytest = "^7.4.2"
+exceptiongroup = "^1.1.3"
+matplotlib = "^3.7.3"
 
 
 [tool.poetry.group.dev.dependencies]
