@@ -14,7 +14,7 @@ pip install poetry
 - Instalar dependencias: `poetry install` o `make install`
 - Iniciar Jupyter Notebook: `poetry run jupyter notebook` o `make notebook`
 - Ejecutar tests: `poetry run pytest` o `make test`
-- Ejecutar programa con un archivo: `poetry run python main.py <archivo>` o `make run file=<archivo>`
+- Ejecutar programa con un archivo: `poetry run python analizarmain.py <archivo_entrada> <archivo_salida>` o `make run file_in=<archivo_entrada> file_out=<archivo_salida>`
 
 ## Formato de archivo
 

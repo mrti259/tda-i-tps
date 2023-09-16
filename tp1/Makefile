@@ -8,4 +8,4 @@ test:
 	poetry run pytest
 
 run:
-	poetry run python main.py '$(file)'
+	poetry run python analizar.py '$(file_in)' '$(file_out)'

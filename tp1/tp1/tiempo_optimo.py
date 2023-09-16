@@ -13,6 +13,6 @@ def tiempo_optimo(tiempos_analisis):
 
         # Si va a ser el ultimo en terminar de analizarse me lo guardo
         if tiempo_fin_analisis_actual > tiempo_fin_maximo:
-            tiempo_fin_maximo = tiempo_fin_analisis_actual  
+            tiempo_fin_maximo = tiempo_fin_analisis_actual 
 
-    return tiempo_fin_maximo
+    return tiempo_fin_maximo, tiempos_analisis

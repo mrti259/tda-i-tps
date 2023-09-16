@@ -1,43 +1,49 @@
 import pytest
 
 from tp1.tiempo_optimo import tiempo_optimo
-from tp1.leer_archivo import leer_archivo
+from tp1.manejo_archivos_analisis import leer_archivo_analisis
 
 def test_1():
-    assert tiempo_optimo([]) == 0
+    tiempo, analisis_ordenados = tiempo_optimo([])
+    assert tiempo == 0
 
 def test_2():
     datos = [
         (1,0),
     ]
-    assert tiempo_optimo(datos) == 1
+    tiempo, analisis_ordenados = tiempo_optimo(datos)
+    assert tiempo == 1
 
 def test_3():
     datos = [
         (1,1),
     ]
-    assert tiempo_optimo(datos) == 2
+    tiempo, analisis_ordenados = tiempo_optimo(datos)
+    assert tiempo == 2
 
 def test_4():
     datos = [
         (1,1),
         (1,0),
     ]
-    assert tiempo_optimo(datos) == 2
+    tiempo, analisis_ordenados = tiempo_optimo(datos)
+    assert tiempo == 2
 
 def test_5():
     datos = [
         (1,3),
         (1,1),
     ]
-    assert tiempo_optimo(datos) == 4
+    tiempo, analisis_ordenados = tiempo_optimo(datos)
+    assert tiempo == 4
 
 def test_6():
     datos = [
         (1,1),
         (1,3),
     ]
-    assert tiempo_optimo(datos) == 4
+    tiempo, analisis_ordenados = tiempo_optimo(datos)
+    assert tiempo == 4
 
 def test_archivos():
     ejemplos = [
@@ -47,5 +53,6 @@ def test_archivos():
         ("data_enunciado/10000 elem.txt", 497886735),
     ]
     for path, optimo in ejemplos:
-        datos = leer_archivo(path)
-        assert tiempo_optimo(datos) == optimo
+        datos = leer_archivo_analisis(path)
+        tiempo, analisis_ordenados = tiempo_optimo(datos)
+        assert tiempo == optimo
