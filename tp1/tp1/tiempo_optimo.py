@@ -8,7 +8,7 @@ def tiempo_optimo(tiempos_analisis):
         # Scaloni ve el video
         tiempo_actual += tiempo_scaloni
 
-        # Cuando estaria terminado el analisis de este contricante
+        # Cuando estaria terminado el analisis de este contrincante
         tiempo_fin_analisis_actual = tiempo_actual + tiempo_ayudante
 
         # Si va a ser el ultimo en terminar de analizarse me lo guardo

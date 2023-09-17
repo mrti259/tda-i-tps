@@ -19,4 +19,4 @@ if __name__ == "__main__":
     escribir_archivo_analisis(tiempos_ordenados, path_salida)
 
     contrincantes = len(tiempos_analisis)
-    print(f"El tiempo óptimo para analizar {contrincantes} contricantes es: {fin_de_analisis}")
+    print(f"El tiempo óptimo para analizar {contrincantes} contrincantes es: {fin_de_analisis}")
