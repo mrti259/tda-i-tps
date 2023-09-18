@@ -36,6 +36,10 @@ S_i,A_i
 - Generación de archivos para pruebas de carga: `notebooks/Crear archivos de analisis.ipynb`
 - Cálculos de tiempos de ejecución con gran volumen de datos: `notebooks/Calculo de tiempos.ipynb`
 
+## Report
+
+En la raiz del directorio `report` se encuentra el informe en formato `.pdf` y luego dentro de `source` se encuentra la fuente del informe (archivos tex e imagenes).
+
 ## Autorxs
 
 - Borja Garibotti
