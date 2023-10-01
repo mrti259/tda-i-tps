@@ -51,6 +51,12 @@ def test_7():
     energia_por_dia = [10, 5, 1]
     assert_mejor_ganancia(20, (dias, ganancia_por_dia, energia_por_dia))
 
+def test_8():
+    dias = 3
+    ganancia_por_dia = [10, 50, 100]
+    energia_por_dia = [100, 5, 1]
+    assert_mejor_ganancia(110, (dias, ganancia_por_dia, energia_por_dia))
+
 def test_archivos():
     ejemplos = [
         ("3.txt", 7),
