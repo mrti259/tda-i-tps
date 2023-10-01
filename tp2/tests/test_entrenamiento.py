@@ -60,17 +60,19 @@ def test_8():
 def test_archivos():
     ejemplos = [
         ("3.txt", 7),
-        # ("10.txt", 380),
-        # ("10_bis.txt", 523),
+        ("10.txt", 380),
+        ("10_bis.txt", 523),
         ("10_todo_entreno.txt", 900),
-        # ("50.txt", 1870),
-        # ("50_bis.txt", 2136),
-        # ("100.txt", 5325),
-        # ("500.txt", 27158),
-        # ("1000.txt", 54021),
-        # ("5000.txt", 279175),
+        ("50.txt", 1870),
+        #("50_bis.txt", 2136),
+        #("100.txt", 5325),
+        #("500.txt", 27158),
+        #("1000.txt", 54021),
+        #("5000.txt", 279175),
     ]
     for archivo_ejemplo, ganancia_esperada in ejemplos:
+        print(f"Testeando archivo {archivo_ejemplo}")
         ruta = os.path.join(RUTA_EJEMPLOS, archivo_ejemplo)
         datos = leer_archivo(ruta)
+        print(f"    Ejecutando analisis...")
         assert_mejor_ganancia(ganancia_esperada, datos)
