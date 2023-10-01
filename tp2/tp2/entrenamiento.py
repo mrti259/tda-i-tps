@@ -11,12 +11,7 @@ def _ganancia_del_dia(dia_entrenamiento, dia_desde_descanso, ganancia_por_dia, e
 
 def mejor_ganancia(ganancia_por_dia, energia_por_dia):
     estrategia = []
-    ganancia = 0
-
-    dias = len(ganancia_por_dia)
-    M = [[None for _ in range(dias)] for _ in range(dias)]
-    ganancia = mejor_ganancia_recursivo_con_memoria(ganancia_por_dia, energia_por_dia, 0, 0, M)
-    
+    ganancia = mejor_ganancia_dinamico(ganancia_por_dia, energia_por_dia)
     return ganancia, estrategia
 
 def mejor_ganancia_greedy(ganancia_por_dia, energia_por_dia):
@@ -68,3 +63,26 @@ def mejor_ganancia_recursivo_con_memoria(ganancia_por_dia, energia_por_dia, dia_
     M[dia_a_analizar][dias_desde_descanso] = ganancia_guardada
     
     return ganancia_guardada
+
+def mejor_ganancia_dinamico(ganancia_por_dia, energia_por_dia):
+    dias_de_entrenamiento = len(ganancia_por_dia)
+    dias_desde_descanso = 0
+    ganancia = 0
+
+    M = []
+
+    for dia_a_analizar in range(dias_de_entrenamiento):
+        for dia_desde_descanso in range(dia_a_analizar):
+            M[dia_a_analizar][dia_desde_descanso] = _ganancia_del_dia(dia_a_analizar, dia_desde_descanso, ganancia_por_dia, energia_por_dia)
+
+        ganancia_entrenando_hoy = (M[dia_a_analizar][dias_desde_descanso] + M[dia_a_analizar + 1][dias_desde_descanso + 1])
+        ganancia_descansando_hoy = M[dia_a_analizar + 1][0]
+
+        if ganancia_descansando_hoy > ganancia_entrenando_hoy:
+            dias_desde_descanso = 0
+            continue
+
+        ganancia += ganancia_entrenando_hoy
+        dias_desde_descanso += 1
+    
+    return ganancia
