@@ -7,15 +7,15 @@ RUTA_EJEMPLOS = "examples"
 
 def test_1_leer_archivo():
     ruta = os.path.join(RUTA_EJEMPLOS, "3.txt")
-    dias, ganancia_por_dia, energia_por_dia = leer_archivo(ruta)
-    assert dias == 3
+    ganancia_por_dia, energia_por_dia = leer_archivo(ruta)
+    dias = 3
     assert len(ganancia_por_dia) == dias
     assert len(energia_por_dia) == dias
 
 def test_2_leer_archivo():
     ruta = os.path.join(RUTA_EJEMPLOS, "10.txt")
-    dias, ganancia_por_dia, energia_por_dia = leer_archivo(ruta)
-    assert dias == 10
+    ganancia_por_dia, energia_por_dia = leer_archivo(ruta)
+    dias = 10
     assert len(ganancia_por_dia) == dias
     assert len(energia_por_dia) == dias
 

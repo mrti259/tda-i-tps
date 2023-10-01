@@ -11,7 +11,7 @@ def leer_archivo(ruta_entrada):
         dias = int(archivo.readline())
         ganancia_por_dia = [int(archivo.readline()) for _ in range(dias)]
         energia_por_dia = [int(archivo.readline()) for _ in range(dias)]
-        return dias, ganancia_por_dia, energia_por_dia
+        return ganancia_por_dia, energia_por_dia
 
 def guardar_estrategia(estrategia, ruta_salida):
     base_path = os.path.dirname(ruta_salida)
