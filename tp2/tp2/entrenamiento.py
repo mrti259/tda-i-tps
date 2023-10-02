@@ -63,10 +63,10 @@ Algoritmo recursivo con Memoización
 """
 
 def mejor_ganancia_recursivo_con_memoria(ganancia_por_dia, energia_por_dia) -> Tuple[int, List[int]]:
-    plan = [] #TODO
     cant_dias = len(ganancia_por_dia)
     M = [[None for _ in range(cant_dias)] for _ in range(cant_dias)]
     ganancia = _mejor_ganancia_recursivo_con_memoria(ganancia_por_dia, energia_por_dia, 0, 0, M)
+    plan = _reconstruir_plan_de_entrenamiento_desde_memo(M, ganancia_por_dia, energia_por_dia)
     return ganancia, plan
 
 def _mejor_ganancia_recursivo_con_memoria(ganancia_por_dia, energia_por_dia, dia_a_analizar, dias_desde_descanso, M) -> int:
@@ -95,23 +95,24 @@ Algoritmo iterativo con Memoización
 def mejor_ganancia_iterativo(ganancia_por_dia, energia_por_dia) -> Tuple[int, List[int]]:
     cant_dias = len(ganancia_por_dia)
 
-    G = [[0 for _ in range(cant_dias+1)] for _ in range(cant_dias+1)]
     M = [[0 for _ in range(cant_dias+1)] for _ in range(cant_dias+1)]
     
     for dia_a_analizar in range(cant_dias):
         for dias_desde_descanso in range(dia_a_analizar + 1):
-            G[dia_a_analizar][dias_desde_descanso] = _ganancia_del_dia(dia_a_analizar, dias_desde_descanso, ganancia_por_dia, energia_por_dia)
-            M[dia_a_analizar][dias_desde_descanso] = G[dia_a_analizar][dias_desde_descanso]
+            M[dia_a_analizar][dias_desde_descanso] = _ganancia_del_dia(dia_a_analizar, dias_desde_descanso, ganancia_por_dia, energia_por_dia)
     
     for dia_a_analizar in range(cant_dias-1, -1, -1):
         for dias_desde_descanso in range(dia_a_analizar + 1):
-            ganancia_si_descanso = G[dia_a_analizar+1][0]
-            ganancia_si_entreno = G[dia_a_analizar][dias_desde_descanso] + G[dia_a_analizar+1][dias_desde_descanso+1]
-            G[dia_a_analizar][dias_desde_descanso] = max(ganancia_si_descanso, ganancia_si_entreno)
-            
-    return G[0][0], _reconstruir_plan_de_entrenamiento_desde_memo(M, G, cant_dias)
+            ganancia_si_descanso = M[dia_a_analizar+1][0]
+            ganancia_si_entreno = M[dia_a_analizar][dias_desde_descanso] + M[dia_a_analizar+1][dias_desde_descanso+1]
+            M[dia_a_analizar][dias_desde_descanso] = max(ganancia_si_descanso, ganancia_si_entreno)
     
-def _reconstruir_plan_de_entrenamiento_desde_memo(M, G, cant_dias):
+    ganancia= M[0][0]
+    plan = _reconstruir_plan_de_entrenamiento_desde_memo(M, ganancia_por_dia, energia_por_dia)
+    return ganancia, plan
+    
+def _reconstruir_plan_de_entrenamiento_desde_memo(M, ganancia_por_dia, energia_por_dia) -> List[int]:
+    cant_dias = len(ganancia_por_dia)
     plan = []
 
     dias_desde_descanso = 0
@@ -122,9 +123,9 @@ def _reconstruir_plan_de_entrenamiento_desde_memo(M, G, cant_dias):
             dias_desde_descanso += 1
             continue
 
-        ganancia_optima = G[dia_a_analizar][dias_desde_descanso]
-        ganancia_del_dia = M[dia_a_analizar][dias_desde_descanso]
-        ganancia_si_entreno = G[dia_a_analizar+1][dias_desde_descanso+1]
+        ganancia_optima = M[dia_a_analizar][dias_desde_descanso]
+        ganancia_del_dia = _ganancia_del_dia(dia_a_analizar, dias_desde_descanso, ganancia_por_dia, energia_por_dia)
+        ganancia_si_entreno = M[dia_a_analizar+1][dias_desde_descanso+1]
 
         if ganancia_optima == ganancia_del_dia + ganancia_si_entreno:
             plan.append(ENTRENO)
