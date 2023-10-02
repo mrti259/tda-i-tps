@@ -14,7 +14,7 @@ if __name__ == "__main__":
     ruta_salida = sys.argv[2]
 
     datos = leer_archivo(ruta_entrada)
-    ganancia, estrategia = mejor_ganancia(*datos)
-    guardar_estrategia(ruta_salida, datos)
+    ganancia, plan = mejor_ganancia(*datos)
+    guardar_plan_de_entrenamiento(plan, ruta_salida)
 
     print(f"La ganancia óptima es: {ganancia}")

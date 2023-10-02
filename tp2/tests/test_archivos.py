@@ -4,6 +4,7 @@ import os
 from tp2.archivos import *
 
 RUTA_EJEMPLOS = "examples"
+RUTA_SALIDA = "tests/salida"
 
 def test_1_leer_archivo():
     ruta = os.path.join(RUTA_EJEMPLOS, "3.txt")
@@ -20,10 +21,6 @@ def test_2_leer_archivo():
     assert len(energia_por_dia) == dias
 
 def test_3_guardar_estrategia():
-    salida = "/tmp/test_3_guardar_estrategia.txt"
-    estrategia = [
-        "asd",
-        "fgh",
-        "jkl",
-    ]
-    guardar_estrategia(estrategia, salida)
+    salida = os.path.join(RUTA_SALIDA, "test_3_guardar_estrategia.txt")
+    plan = [1, 0, 1]
+    guardar_plan_de_entrenamiento(plan, salida)

@@ -13,10 +13,10 @@ def leer_archivo(ruta_entrada):
         energia_por_dia = [int(archivo.readline()) for _ in range(dias)]
         return ganancia_por_dia, energia_por_dia
 
-def guardar_estrategia(estrategia, ruta_salida):
+def guardar_plan_de_entrenamiento(plan, ruta_salida):
     base_path = os.path.dirname(ruta_salida)
     os.makedirs(base_path, exist_ok=True)
     with open(ruta_salida, "w") as archivo:
-        for dia in estrategia:
-            archivo.write(dia)
+        for se_entrena in plan:
+            archivo.write("Entreno" if se_entrena else "Descanso")
             archivo.write("\n")
