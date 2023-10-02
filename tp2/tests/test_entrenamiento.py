@@ -1,13 +1,18 @@
 import pytest
 import os
+import time
 
-from tp2.entrenamiento import mejor_ganancia
+from tp2.entrenamiento import *
 from tp2.archivos import leer_archivo
 
 RUTA_EJEMPLOS = "examples"
 
 def assert_mejor_ganancia(esperado, datos):
     assert esperado == mejor_ganancia(*datos)[0]
+    # assert esperado == mejor_ganancia_greedy(*datos)
+    # assert esperado == mejor_ganancia_recursivo(*datos)
+    # assert esperado == mejor_ganancia_recursivo_con_memoria(*datos)
+    # assert esperado == mejor_ganancia_iterativo(*datos)
 
 def test_1():
     # dias = 0
@@ -75,4 +80,7 @@ def test_archivos():
         ruta = os.path.join(RUTA_EJEMPLOS, archivo_ejemplo)
         datos = leer_archivo(ruta)
         print(f"    Ejecutando analisis...")
+        tiempo_inicio = time.perf_counter()
         assert_mejor_ganancia(ganancia_esperada, datos)
+        tiempo_fin = time.perf_counter()
+        print(f"    Ejecutado en {round((tiempo_fin - tiempo_inicio) * 1000, 2)} ms")
