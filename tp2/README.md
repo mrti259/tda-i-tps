@@ -18,7 +18,10 @@ pip install poetry
 
 ## Formato de archivo
 
-TODO
+El formato de los sets de datos es: 
+En la primera línea el valor de la cantidad de días a considerar (n)
+En las siguientes n líneas, las ganancias de dichos días (nuestros e_i).
+En las siguientes n líneas, la energía con la que se cuenta al día 1, 2, 3, ..., n de estar entrenando sin haber descansando previamente (nuestros s_i).
 
 ## Notebooks
 
