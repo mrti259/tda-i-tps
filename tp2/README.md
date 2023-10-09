@@ -25,7 +25,10 @@ En las siguientes n líneas, la energía con la que se cuenta al día 1, 2, 3, .
 
 ## Notebooks
 
-TODO
+- Desarrollo de los algoritmos de programación dinamica: `notebooks/pd.ipynb`
+- Pruebas de los ejemplos: `notebooks/pruebas_ejemplos.ipynb`
+- Primer analisis de tiempos de ejecución: `notebooks/tiempos_ejecucion.ipynb`
+- Analisis definitivo de tiempos de ejecución: `notebooks/tiempos_ejecucion_final.ipynb`
 
 ## Reporte
 
