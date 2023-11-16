@@ -8,3 +8,9 @@ Además, para levantar un entorno virtual e instalar las dependencias, es recome
 ``` sh
 pip install poetry
 ```
+
+## Autorxs
+
+- Borja Garibotti
+- Mauro Rizzi
+- Julieta Taras 
