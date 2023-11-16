@@ -3,7 +3,7 @@
 El presente trabajo busca evaluar el desarrollo y análisis de un algoritmo 
 de Backtracking para resolver un Problema NP-Completo, así como el análisis 
 de posibles aproximaciones. 
-La fecha de entrega del mismo es el {{fecha}}.
+La fecha de entrega del mismo es el 24/11/23.
 
 ## Introducción
 
