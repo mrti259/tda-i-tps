@@ -1,0 +1,10 @@
+Jugador_27,Jugador_18,Jugador_28,Jugador_30,Jugador_8,Jugador_23,Jugador_35
+Jugador_22,Jugador_13,Jugador_20,Jugador_5,Jugador_4
+Jugador_4,Jugador_45,Jugador_44,Jugador_12,Jugador_38
+Jugador_27,Jugador_22,Jugador_48
+Jugador_13,Jugador_16,Jugador_21,Jugador_12,Jugador_45
+Jugador_41,Jugador_40,Jugador_28,Jugador_12,Jugador_29,Jugador_47,Jugador_22
+Jugador_36,Jugador_39,Jugador_13,Jugador_10,Jugador_25
+Jugador_3,Jugador_19,Jugador_10,Jugador_28
+Jugador_46,Jugador_30,Jugador_12,Jugador_42,Jugador_4,Jugador_16,Jugador_34,Jugador_24
+Jugador_31,Jugador_10,Jugador_46,Jugador_24
