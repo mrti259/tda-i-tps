@@ -14,8 +14,8 @@ Además, para levantar un entorno virtual e instalar las dependencias, es recome
 
 ## Formato de archivo
 
-- Datos de entreada: los archivos tienen 1 conjunto (pedido de la prensa) por línea, separados por ",".
-- Datos de salida: los archivos tienen los jugadores seleccionados por el algoritmo, separados por ",".
+- Datos de entrada: los archivos tienen 1 conjunto (pedido de la prensa) por línea, separados por `","`.
+- Datos de salida: los archivos tienen los jugadores seleccionados por el algoritmo, separados por `","`.
 
 ## Notebooks
 
