@@ -125,7 +125,7 @@ Esto quiere decir que: Sabemos que un problema es NP-Completo si y solo si es un
 \newpage
 \subsubsection{Demostración}
 
-Utilizaremos el problema de la satisfacción booleana (SAT) como ejemplo de un problema NP-completo. Este problema plantea la pregunta de si, dado un conjunto de cláusulas, donde cada una es una combinación de variables booleanas conectadas por operadores OR, es posible encontrar una asignación de valores a las variables que satisfaga todas las cláusulas. Podemos reducir polinomicamente Hitting Set a SAT, hagamos la demostración:
+Utilizaremos el problema de la satisfacción booleana (SAT) como ejemplo de un problema NP-completo. Este problema plantea la pregunta de si, dado un conjunto de cláusulas, donde cada una es una combinación de variables booleanas conectadas por operadores OR, es posible encontrar una asignación de valores a las variables que satisfaga todas las cláusulas. Podemos reducir polinómicamente Hitting Set a SAT, hagamos la demostración:
 
 Dada una instancia de SAT, construimos una fórmula booleana \(F\) para Hitting-Set Problem de la siguiente manera:
 
@@ -217,7 +217,7 @@ Se aplicaron las siguientes optimizaciones:
 
 \subsection{Complejidad algorítmica}
 
-La complejidad algorítmica es $O(2^n)$ ya que en el peor de los casos este algoritmo termina corriendo como su base de fuerza bruta, donde se prueban todas las combinaciones posibles de jugadores hasta encontrar una solución valida.
+La complejidad algorítmica es $O(2^n)$ ya que en el peor de los casos este algoritmo termina corriendo como su base de fuerza bruta, donde se prueban todas las combinaciones posibles de jugadores hasta encontrar una solución válida.
 
 \newpage
 \subsection{El algoritmo}
@@ -351,7 +351,7 @@ def hitting_set_aproximacion_bilardo(deseos):
 
 \subsection{Análisis de la aproximación}
 
-Optimo $z(1000) = 26$ bilardo $A(1000) = 50$
+Óptimo $z(1000) = 26$ bilardo $A(1000) = 50$
 $A(1000)/z(1000) = 50/26 $
 
 considerar lo siguiente:
@@ -394,6 +394,10 @@ Z=26, A=50, r=1.9230769230769231, N=1000
 
 Este algoritmo aproxima el resultado eligiendo en cada iteración al jugador más deseado (el que mas se repite entre todos los deseos aun sin cumplir), de manera que se cumpla siempre con la mayor cantidad de deseos posibles en cada iteración.
 
+\subsection{Complejidad algorítmica}
+
+La complejidad algorítmica es $O(m^2 * n)$ porque en el peor de los casos se itera dos veces sobre los deseos de prensa, es decir, en el caso de que en cada iteración solo se cumpla un deseo se van a realizar $m$ iteraciones. Dentro de las cuales se itera por todos los deseos restantes y por cada deseo se itera hasta por $n$ jugadores buscando el que mas deseos cumpla sumando $O(n)$ a la complejidad.
+
 \subsection{El algoritmo}
 
 \begin{lstlisting}[language=Python]
@@ -414,10 +418,6 @@ def hitting_set_greedy(deseos_prensa):
         deseos_prensa = _deseos_restantes(deseos_prensa, convocados)
     return convocados
 \end{lstlisting}
-
-\subsection{Complejidad algorítmica}
-
-La complejidad algorítmica es $O(m^2 * n)$ porque en el peor de los casos se itera dos veces sobre los deseos de prensa, es decir, como máximo $O(m)$ cada iteración y, en cada iteración, encontrar al máximo es $O(n)$ porque un deseo puede tener hasta $n$ jugadores.
 
 \newpage
 
@@ -476,7 +476,7 @@ Vemos que el algoritmo de Bilardo siempre devuelve más jugadores según cantida
 
 Podemos concluir que el algoritmo de Programación Lineal nos permitió encontrar una solución óptima evitando explorar un espacio exponencial de soluciones como se hace con el algoritmo de Backtracking, por lo cuál, gracias a esta metodología pudimos reducir significativamente los tiempos de ejecución del algoritmo.
 
-También encontramos que el algoritmo de aproximación Greedy en promedio tiene mejor rendimiento que el algoritmo por aproximación Bilardo tanto en los tiempos de ejecución como hallando soluciones más próximas a la solución óptima.
+También encontramos que el algoritmo de aproximación Greedy que implementamos, en promedio, tiene mejor rendimiento que el algoritmo por aproximación Bilardo. Tanto en los tiempos de ejecución como hallando soluciones más próximas a la óptima.
 
 Con grandes sets de datos, obtener la solución óptima requiere aumentar los tiempos de ejecución, por lo cuál, puede ser preferible utilizar un algoritmo de aproximación sabiendo que puede no obtener una solución óptima. 
 
