@@ -10,3 +10,9 @@ def test_backtracking():
 
 def test_programacion_lineal():
     _assert_es_solucion_optima(resolver_por_programacion_lineal("examples/5.txt"), 2)
+
+def test_aproximacion_bilardo():
+    resolver_por_aproximacion_bilardo("examples/5.txt")
+
+def test_greedy():
+    resolver_greedy("examples/5.txt")
