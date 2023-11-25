@@ -110,7 +110,7 @@ Programación lineal
 """
 
 def hitting_set_programacion_lineal(deseos):
-    deseos = [set(jugador) for jugador in deseos]
+    deseos = [set(deseo) for deseo in deseos]
 
     jugadores = set.union(*deseos)
     x = LpVariable.dicts('x', jugadores, cat='Binary')
@@ -129,7 +129,7 @@ Aproximación Bilardo
 """
 
 def hitting_set_aproximacion_bilardo(deseos):
-    deseos = [set(jugador) for jugador in deseos]
+    deseos = [set(deseo) for deseo in deseos]
     
     b = max(len(deseo) for deseo in deseos)
     jugadores = set.union(*deseos)
