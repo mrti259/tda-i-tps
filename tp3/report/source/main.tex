@@ -125,7 +125,7 @@ Esto quiere decir que: Sabemos que un problema es NP-Completo si y solo si es un
 \newpage
 \subsubsection{Demostración}
 
-Utilizaremos el problema de la satisfacción booleana (SAT) como ejemplo de un problema NP-completo. Este problema plantea la pregunta de si, dado un conjunto de cláusulas, donde cada una es una combinación de variables booleanas conectadas por operadores OR, es posible encontrar una asignación de valores a las variables que satisfaga todas las cláusulas. Podemos reducir polinomicamente Hitting Set a SAT, hagamos la demostración:
+Utilizaremos el problema de la satisfacción booleana (SAT) como ejemplo de un problema NP-completo. Este problema plantea la pregunta de si, dado un conjunto de cláusulas, donde cada una es una combinación de variables booleanas conectadas por operadores OR, es posible encontrar una asignación de valores a las variables que satisfaga todas las cláusulas. Podemos reducir polinómicamente Hitting Set a SAT, hagamos la demostración:
 
 Dada una instancia de SAT, construimos una fórmula booleana \(F\) para Hitting-Set Problem de la siguiente manera:
 
@@ -217,7 +217,7 @@ Se aplicaron las siguientes optimizaciones:
 
 \subsection{Complejidad algorítmica}
 
-La complejidad algorítmica es $O(2^n)$ ya que en el peor de los casos este algoritmo termina corriendo como su base de fuerza bruta, donde se prueban todas las combinaciones posibles de jugadores hasta encontrar una solución valida.
+La complejidad algorítmica es $O(2^n)$ ya que en el peor de los casos este algoritmo termina corriendo como su base de fuerza bruta, donde se prueban todas las combinaciones posibles de jugadores hasta encontrar una solución válida.
 
 \newpage
 \subsection{El algoritmo}
@@ -298,9 +298,6 @@ def _todos_los_deseos_se_pueden_cumplir(deseos_prensa, descartados):
 
 Este algoritmo hace uso de la biblioteca PuLP de Python para resolver el problema mediante Programación Lineal. Consiste en definir qué problema debe resolver el modelo y cuáles son sus restricciones a través de ecuaciones matemáticas. Utilizando lógica binaria con 0s y 1s para representar si un jugador es convocado o no.
 
-% \newpage
-
-
 \subsection{El algoritmo}
 
 \begin{lstlisting}[language=Python]
@@ -321,6 +318,8 @@ def hitting_set_programacion_lineal(deseos):
     convocados = [jugador for jugador in jugadores if x[jugador].value() == 1]
     return convocados
 \end{lstlisting}
+
+\newpage
 
 \section{Algoritmo de aproximación Bilardo}
 
@@ -350,32 +349,54 @@ def hitting_set_aproximacion_bilardo(deseos):
     return convocados
 \end{lstlisting}
 
-\subsection{Complejidad algorítmica}
+% \subsection{Análisis de la aproximación}
 
-La complejidad algorítmica es $O(m * n)$. 
+% Óptimo $z(1000) = 26$ bilardo $A(1000) = 50$
+% $A(1000)/z(1000) = 50/26 $
+% 
+% considerar lo siguiente:
+%     Sea $I$ una instancia cualquiera del Hitting-Set Problem, y $z(I)$ una
+%     solución óptima para dicha instancia, y sea $A(I)$ la solución aproximada,
+%     se define $\frac{A(I)}{z(I)} \leq r(A)$ para todas las instancias posibles.
+%     Calcular $r(A)$ para el algoritmo dado, demostrando que la cota está bien
+%     calculada. Realizar mediciones utilizando el algoritmo exacto y la aproximación,
+%     con el objetivo de verificar dicha relación. Realizar también mediciones
+%     que contemplen volúmenes de datos ya inmanejables para el algoritmo exacto,
+%     a fin de corroborar empíricamente la cota calculada anteriormente.
+% 
+% 
+% Z=13, A=29, r=2.230769230769231, N=100
+% 
+% Z=16, A=40, r=2.5, N=200
+% 
+% Z=20, A=44, r=2.2, N=300
+% 
+% Z=21, A=43, r=2.0476190476190474, N=400
+% 
+% Z=23, A=45, r=1.9565217391304348, N=500
+% 
+% Z=23, A=48, r=2.0869565217391304, N=600
+% 
+% Z=24, A=49, r=2.0416666666666665, N=700
+% 
+% Z=25, A=50, r=2.0, N=800
+% 
+% Z=26, A=50, r=1.9230769230769231, N=900
+% 
+% Z=26, A=50, r=1.9230769230769231, N=1000
 
-\subsection{Análisis de la aproximación}
 
-Optimo $z(1000) = 26$ bilardo $A(1000) = 50$
-$A(1000)/z(1000) = 50/26 $
-
-considerar lo siguiente:
-    Sea $I$ una instancia cualquiera del Hitting-Set Problem, y $z(I)$ una
-    solución óptima para dicha instancia, y sea $A(I)$ la solución aproximada,
-    se define $\frac{A(I)}{z(I)} \leq r(A)$ para todas las instancias posibles.
-    Calcular $r(A)$ para el algoritmo dado, demostrando que la cota está bien
-    calculada. Realizar mediciones utilizando el algoritmo exacto y la aproximación,
-    con el objetivo de verificar dicha relación. Realizar también mediciones
-    que contemplen volúmenes de datos ya inmanejables para el algoritmo exacto,
-    a fin de corroborar empíricamente la cota calculada anteriormente.
-
-% \newpage
+\newpage
 
 \section{Algoritmo Greedy}
 
 \subsection{Introducción}
 
-Este algoritmo aproxima el resultado eligiendo en cada iteración al jugador más deseado, de manera que se descartan siempre la mayor cantidad de deseos para la iteración siguiente.
+Este algoritmo aproxima el resultado eligiendo en cada iteración al jugador más deseado (el que mas se repite entre todos los deseos aun sin cumplir), de manera que se cumpla siempre con la mayor cantidad de deseos posibles en cada iteración.
+
+\subsection{Complejidad algorítmica}
+
+La complejidad algorítmica es $O(m^2 * n)$ porque en el peor de los casos se itera dos veces sobre los deseos de prensa, es decir, en el caso de que en cada iteración solo se cumpla un deseo se van a realizar $m$ iteraciones. Dentro de las cuales se itera por todos los deseos restantes y por cada deseo se itera hasta por $n$ jugadores buscando el que mas deseos cumpla sumando $O(n)$ a la complejidad.
 
 \subsection{El algoritmo}
 
@@ -398,9 +419,7 @@ def hitting_set_greedy(deseos_prensa):
     return convocados
 \end{lstlisting}
 
-\subsection{Complejidad algorítmica}
-
-La complejidad algorítmica es $O(n^2)$.
+\newpage
 
 \section{Mediciones}
 \subsection{Metodología}
@@ -411,46 +430,55 @@ Estos sets de datos nos permitieron realizar las mediciones de los tiempos de ej
 
 \subsection{Resultados}
 
-:
-
 \begin{center}
 \includegraphics[width=0.7\textwidth]{img/tiempo_backtracking.png}
-\end{center}
 
+Podemos observar que, a medida que se va aumentando la cantidad de deseos, el tiempo de ejecución del algoritmo de Backtracking aumenta exponencialmente.
+\end{center}
 
 \begin{center}
 \includegraphics[width=0.7\textwidth]{img/tiempo_pl.png}
-\end{center}
 
-\begin{center}
-\includegraphics[width=0.7\textwidth]{img/tiempo_bilardo.png}
-\end{center}
-
-\begin{center}
-\includegraphics[width=0.7\textwidth]{img/tiempo_greedy.png}
+Podemos observar que, la curva con el algoritmo con Programación Lineal es más gradual que en comparación con la curva del algoritmo de Backtracking.
 \end{center}
 
 \begin{center}
 \includegraphics[width=0.7\textwidth]{img/backtracking_vs_pl.png}
+
+Si comparamos los resultados de evaluar ambos algoritmos con los mismos sets de datos, observamos que el algoritmo de Programación Lineal se desempeña mejor que el algoritmo de Backtracking, el cual con pocos sets de datos aumenta exponencialmente sus tiempos de ejecución.
+\end{center}
+
+\begin{center}
+\includegraphics[width=0.7\textwidth]{img/tiempo_bilardo.png}
+
+Se puede observar que el algoritmo de aproximación Bilardo reduce significativamente los tiempos de ejecución, a cambio de obtener una solución que puede diferir bastante con la solución óptima.
+\end{center}
+
+\begin{center}
+\includegraphics[width=0.7\textwidth]{img/tiempo_greedy.png}
+
+También con este algoritmo de aproximación sucede que, se reduce significativamente el tiempo de ejecución a cambio de obtener una solución que puede diferir de la solución óptima.
 \end{center}
 
 \begin{center}
 \includegraphics[width=0.7\textwidth]{img/bilardo_vs_greedy_1.png}
 
-Podemos observar como los diferentes algoritmos de aproximación difieren, siendo que el algoritmo de Bilardo tarda un poco mas según la cantidad de deseos.
+Podemos observar como los diferentes algoritmos de aproximación difieren en su complejidad, mostrando que el algoritmo Greedy tiene un tiempo de ejecución menor al algoritmo de Bilardo según la cantidad de deseos.
 \end{center}
 
 \begin{center}
 \includegraphics[width=0.7\textwidth]{img/bilardo_vs_greedy_2.png}
 
-Podemos observar como difieren los algoritmos por su "error", vemos que el algoritmo de Bilardo devuelve mas jugadores según cantidad de deseos a comparación que el algorimo Greedy, por lo tanto, pareciera ser mas óptimo este último.
+Vemos que el algoritmo de Bilardo siempre devuelve más jugadores según cantidad de deseos a comparación que el algoritmo Greedy, por lo tanto, pareciera ser mas óptimo este último.
 \end{center}
 
 \section{Conclusiones}
 
-Podemos concluir que la solución mediante Programación Lineal nos permitió encontrar una solución óptima evitando explorar un espacio exponencial de soluciones como se hace con el algoritmo de Backtracking, por lo cual, gracias a esta metodología pudimos reducir significativamente los tiempos de ejecución del algoritmo. 
+Podemos concluir que el algoritmo de Programación Lineal nos permitió encontrar una solución óptima evitando explorar un espacio exponencial de soluciones como se hace con el algoritmo de Backtracking, por lo cuál, gracias a esta metodología pudimos reducir significativamente los tiempos de ejecución del algoritmo.
 
-También encontramos que el algoritmo de aproximación Greedy tiene mejor rendimiento que el algoritmo por aproximación Bilardo tanto en los tiempos de ejecución como hallando soluciones más próximas a la solución óptima.
+También encontramos que el algoritmo de aproximación Greedy que implementamos, en promedio, tiene mejor rendimiento que el algoritmo por aproximación Bilardo. Tanto en los tiempos de ejecución como hallando soluciones más próximas a la óptima.
+
+Con grandes sets de datos, obtener la solución óptima requiere aumentar los tiempos de ejecución, por lo cuál, puede ser preferible utilizar un algoritmo de aproximación sabiendo que puede no obtener una solución óptima. 
 
 \end{document}
 
