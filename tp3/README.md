@@ -10,7 +10,7 @@ Además, para levantar un entorno virtual e instalar las dependencias, es recome
 - Instalar dependencias: `poetry install` o `make install`
 - Iniciar Jupyter Notebook: `poetry run jupyter notebook` o `make notebook`
 - Ejecutar tests: `poetry run pytest` o `make test`
-- Ejecutar programa con un archivo: `poetry run python tp3/selector.py <path/de/archivo_entrada.txt> <path/de/archivo_salida.txt> <metodo>` o `make run entrada=<path/de/archivo_entrada.txt> salida=<path/de/archivo_salida.txt> metodo=<metodo>`
+- Ejecutar programa con un archivo: `poetry run python selector.py <path/de/archivo_entrada.txt> <path/de/archivo_salida.txt> <metodo>` o `make run entrada=<path/de/archivo_entrada.txt> salida=<path/de/archivo_salida.txt> metodo=<metodo>`
 
 ## Formato de archivo
 
