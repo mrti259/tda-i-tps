@@ -78,7 +78,7 @@
 
 \section{Problemas NP-Completos}
 
-El problema consiste en encontrar el conjunto mínimo de jugadores que satisface los deseos de la prensa. Como datos de entrada tenemos los deseos de la prensa.
+El problema consiste en encontrar el conjunto mínimo de jugadores que satisface con al menos un jugador todos los deseos de la prensa. Como datos de entrada tenemos los deseos de la prensa, en base a los cuales obtenemos los jugadores a considerar.
 
 
 \subsection{Demostración que Hitting Set es un problema NP}
@@ -122,7 +122,7 @@ Esto quiere decir que: Sabemos que un problema es NP-Completo si y solo si es un
 \newpage
 \subsubsection{Demostración}
 
-Utilizaremos el problema de satisfacibilidad con cláusulas de 3 variables (3-SAT) como ejemplo de un problema NP-completo. Este problema plantea la pregunta de si, dada una expresión donde cada clausula contiene tres variables booleanas conectadas por operadores OR, es posible encontrar una asignación de valores a las variables que satisfaga todas las cláusulas. Para demostrar que Hitting Set es un problema NP-Completo, podemos reducir polinómicamente 3-SAT a este problema.
+Utilizaremos el problema de satisfacibilidad con cláusulas de 3 variables (3-SAT) como ejemplo de un problema NP-completo. Este problema plantea la pregunta de si, dada una expresión donde cada clausula contiene tres variables booleanas conectadas por operadores OR, es posible encontrar una asignación de verdad para las variables que satisfaga todas las cláusulas. Para demostrar que Hitting Set es un problema NP-Completo, podemos reducir polinómicamente 3-SAT a este problema.
 
 Dada una instancia de 3-SAT, construimos una fórmula booleana \(F\) para Hitting-Set Problem de la siguiente manera:
 
@@ -141,15 +141,15 @@ Supongamos que tenemos la siguiente instancia de 3-SAT:
 Ahora, construimos la instancia correspondiente del \textit{Hitting-Set Problem} utilizando la reducción mencionada:
 
 \begin{minipage}[t]{0.7\textwidth}
-    \textbf{Conjunto universal:} \(X = \{x_1, \neg x_1, x_2, \neg x_2, x_3 \neg x_3\}\).
+    \textbf{Conjunto universal:} \(X = \{x_1, \overline{x_1}, x_2, \overline{x_2}, x_3 \overline{x_3}\}\).
 
     \vspace{0.5cm}
 
     \textbf{Subconjuntos \(B_i\):}
     \begin{align*}
-        B_1 & = \{x_1, x_2, \neg x_3\} \\
-        B_2 & = \{\neg x_1, x_2, x_3\} \\
-        B_3 & = \{x_1, \neg x_2, \neg x_3\}
+        B_1 & = \{x_1, x_2, \overline{x_3}\} \\
+        B_2 & = \{\overline{x_1}, x_2, x_3\} \\
+        B_3 & = \{x_1, \overline{x_2}, \overline{x_3}\}
     \end{align*}
 \end{minipage}
 \hfill
@@ -182,7 +182,7 @@ Ahora, construimos la instancia correspondiente del \textit{Hitting-Set Problem}
 
 Entonces, para resolver el \textit{Hitting-Set Problem}, necesitamos encontrar un conjunto de elementos seleccionados \(C\) tal que \(|C| \leq k\) y \(C \cap B_i \neq \emptyset\) para cada \(B_i\) en \(F\).
 
-Como $F$ está compuesto por tres términos, suponemos que $k = 3$, ya que una solución no puede contener una variable que es positiva y negativa al mismo tiempo. 
+Como $F$ está compuesto por tres variables y sus complementos, suponemos que $k = 3$, ya que una solución no puede contener una variable que es positiva y negativa al mismo tiempo. 
 
 Un conjunto de elementos seleccionados posible podría ser \(C = \{x_1, x_2\}\):
 
@@ -192,7 +192,7 @@ Verificamos si esta asignación satisface todas las cláusulas de 3-SAT:
 
 \[ B_1: (x_1 \lor x_2 \lor \neg x_3) = (\text{True} \lor \text{True} \lor \text{True}) = \text{True} \]
 \[ B_2: (\neg x_1 \lor x_2 \lor x_3) = (\text{False} \lor \text{True} \lor \text{False}) = \text{True} \]
-\[ B_3: (x_1 \lor \neg x_2 \lor \neg x_3) = (\text{True} \lor \text{False} \lor \text{False}) = \text{True} \]
+\[ B_3: (x_1 \lor \neg x_2 \lor \neg x_3) = (\text{True} \lor \text{False} \lor \text{True}) = \text{True} \]
 
 La asignación satisface todas las cláusulas de 3-SAT \checkmark.
 
@@ -210,9 +210,9 @@ A su vez, vemos que:
 \end{itemize}
 
 
-Por lo tanto, \(C = \{x_1, x_2\}\) es un conjunto de elementos seleccionados válido para la instancia del \textit{Hitting-Set Problem}, pero dado que 3-SAT es un problema de decisión nos basta con saber que hay solución valida posible.
+Por lo tanto, \(C = \{x_1, x_2\}\) es un conjunto de elementos seleccionados válido para la instancia del \textit{Hitting-Set Problem}, pero dado que \textit{3-SAT} es un problema de decisión nos basta con saber que hay solución válida posible.
 
-En resumen, hemos demostrado que el \textit{Hitting-Set Problem} está en NP y que es NP-completo al mostrar una reducción polinómica desde \textit{3-SAT}.
+En resumen, hemos demostrado que el \textit{Hitting-Set Problem} está en NP y que es NP-Completo al mostrar una reducción polinómica desde \textit{3-SAT}.
 
 \section{Algoritmo de Backtracking}
 
@@ -314,11 +314,11 @@ def _todos_los_deseos_se_pueden_cumplir(deseos_prensa, descartados):
 
 Este algoritmo hace uso de la biblioteca PuLP de Python para resolver el problema mediante Programación Lineal. Consiste en definir qué problema debe resolver el modelo y cuáles son sus restricciones a través de ecuaciones matemáticas.
 
-Para comenzar, se definen las variables de decisión creando un diccionario $x$ con los jugadores como variables binarias: se utiliza la lógica binaria con 1s y 0s para representar si un jugador $x[jugador]$ es convocado o no.
+Para comenzar, se definen las variables de decisión creando un diccionario $x$ con los jugadores (obtenidos a partir de los deseos) como variables binarias utilizando 1s y 0s para representar si un jugador ( $x[jugador]$ ) es convocado o no respectivamente.
 
-Después, se define el problema de programación lineal entera cuya función objetivo busca minimizar la suma de las variables $x$ para así minimizar el tamaño del conjunto de los jugadores convocados. Además, por cada deseo se agrega una restricción donde la suma de las variables $x$ correspondientes a los jugadores del deseo debe ser mayor o igual a 1 para asegurar que al menos un jugador de cada conjunto sea convocado.
+Después, se define el problema de programación lineal entera cuya función objetivo busca minimizar la suma de las variables $x$ para así minimizar el tamaño del conjunto de los jugadores convocados. Agregando, por cada deseo, una restricción donde la suma de las variables $x$ correspondientes a los jugadores del deseo debe ser mayor o igual a 1, asegurando que al menos un jugador de cada conjunto sea convocado.
 
-Una vez terminado de definir el modelo, se utiliza el metodo \texttt{solve()} para encontrar la solución óptima, y se obtienen la lista de jugadores convocados revisando las variables $x$ que tienen un valor de 1 en la solución óptima.
+Una vez terminado de definir el modelo, se utiliza el método \texttt{solve()} para ejecutar el algoritmo de programación lineal y obtener la solución óptima del modelo, permitiendo, luego, obtener la lista de jugadores convocados a través de indexar las variables $x$ que tienen un valor de 1 en la solución obtenida dentro de la lista de jugadores obtenida al principio.
 
 
 \subsection{El algoritmo}
@@ -359,27 +359,15 @@ Sea $I$ una instancia cualquiera del Hitting-Set Problem, y $z(I)$ una solución
 Supongamos que la elección de cada jugador $x_i$ tiene un costo $w_i$. Necesitamos minimizar $w(S) = \sum_{i \in S} w_i$.
 
 Por cada deseo de prensa, tenemos
-
-$\sum w_j x_j \ge 1 \forall x_j \in B_i$
-
-y $0 \le x_i \le 1, i \in S$
-
-Si tomamos como parte de la solución todo $x_i \ge \frac{1}{b}$, entonces
-
-$w(S^*) = \sum_{i} w_i x_i^* \ge \sum_{i \in S} w_i x_i^* \ge \frac{1}{b} \sum_{i \in S} w_i = \frac{1}{b} w(S)$
-
-$b \cdot w(S^*) \ge w(S)$
-
-$b \cdot w(A(I)) \ge w(z(I))$
-
+\[\sum w_j x_j \ge 1 \forall x_j \in B_i \quad\quad\quad \text{y} \quad\quad\quad 0 \le x_i \le 1, i \in S\]
+Si tomamos como parte de la solución todo $x_i \ge \frac{1}{b}$, entonces:
+\[w(S^*) = \sum_{i} w_i x_i^* \ge \sum_{i \in S} w_i x_i^* \ge \frac{1}{b} \sum_{i \in S} w_i = \frac{1}{b} w(S)\]
+\[b \cdot w(S^*) \ge w(S)\]
+\[b \cdot w(A(I)) \ge w(z(I))\]
 La solución aproximada $A(I)$ es como mucho $b$ veces más grande que la solución óptima $z(I)$.
-
-$\frac{A(I)}{z(I)}
-\le \frac{b \cdot z(I)}{z(I)} = b = r(A)$
-
-% Calcular $r(A)$ para el algoritmo dado, demostrando que la cota está bien calculada. Realizar mediciones utilizando el algoritmo exacto y la aproximación, con el objetivo de verificar dicha relación. Realizar también mediciones que contemplen volúmenes de datos ya inmanejables para el algoritmo exacto, a fin de corroborar empíricamente la cota calculada anteriormente.
+\[\frac{A(I)}{z(I)}\le \frac{b \cdot z(I)}{z(I)} = b = r(A)\]
     
-
+Se puede encontrar el resultado de las pruebas empíricas realizadas para corroborar esta cota en la Página 14 de este mismo informe.
 \subsection{El algoritmo}
 
 \begin{lstlisting}[language=Python]
@@ -414,30 +402,35 @@ Este algoritmo aproxima el resultado eligiendo en cada iteración al jugador má
 
 \subsection{Análisis de la aproximación}
 
-En un principio podemos suponer que todos los jugadores tienen la misma probabilidad de ser elegidos, donde $p(x_i) \ge \frac{1}{n} \forall x_i \in A$ y  $\sum_i p(x_i) = 1$.
-
 Cada vez que se busca al jugador más deseado entre los deseos restantes, se esta eligiendo al jugador que tiene más probabilidades de pertenecer a la solución. Sin embargo, pueden haber pequeños deseos que tengan jugadores pocos frecuentes por lo que son más difíciles de satisfacer.
 
-Por ejemplo. si nuestros deseos son: \{\{1,2\}, \{1,2\}, \{1,3\}, \{1,3\}, \{2,4\}, \{3,5\}\}
+Por ejemplo. si nuestros deseos son: \{\{1,2\}, \{1,2\}, \{1,3\}, \{1,3\}, \{2\}, \{3\}\}
 Podemos ver que el 1 es el que más se repite (4 veces) y será el primero en ser seleccionado.
-Esto nos dejará los deseos {{2,4}, {3,5}} sin cumplir, por lo que necesitaremos tomar todavía 2 números más, por lo que el Greedy nos quedará de tamaño 3. Podemos comprobar fácilmente que una solución óptima habría sido {2,3}.
+Esto nos dejará los deseos {{2}, {3}} sin cumplir, por lo que necesitaremos tomar todavía 2 números más, por lo que el Greedy nos quedará de tamaño 3. Podemos comprobar fácilmente que una solución óptima habría sido {2,3}.
 
 Lo mismo sucedería en el caso que contemos con deseos con la siguiente estructura:
-\\\{
-\\\{1,2\}, \{1,2\}, \{1,3\}, \{1,3\}, \{2,4\}, \{3,5\},
-\\\{6,7\}, \{6,7\}, \{6,8\}, \{6,8\}, \{7,9\}, \{8,10\},
-\\\{11,12\}, \{11,12\}, \{11,13\}, \{11,13\}, \{12,14\}, \{13,15\},
-\\\}
+\[\{\]
+\[\{1,2\}, \{1,2\}, \{1,3\}, \{1,3\}, \{2,4\}, \{3,5\},\]
+\[\{6,7\}, \{6,7\}, \{6,8\}, \{6,8\}, \{7,9\}, \{8,10\},\]
+\[\{11,12\}, \{11,12\}, \{11,13\}, \{11,13\}, \{12,14\}, \{13,15\},\]
+\[\}
 
-La solución Greedy sería: \{1,6,11,2,3,7,8,12,13\} (9), mientras una solución óptima sería \{2,3,7,8,12,13\} (6).
+El resultado del algoritmo Greedy nos devuelve: \{1,6,11,2,3,7,8,12,13\} (9 jugadores), mientras una solución óptima obtenemos \{2,3,7,8,12,13\} (6 jugadores).
 
-Sea $T$ el tamaño de una solución óptima, y $T^*$ el tamaño de una solución aproximada, podemos concluir que siempre $T \le T^* \le n$.
+Para empezar a acotar un poco nuestra aproximación sabemos que la solución aproximada $S^* \subseteq A$, por lo tanto, $|S^*| \le n$. 
 
+Como el universo de jugadores A podría ser infinito, podemos definir un subconjunto $D$ formado por aquellos jugadores que se encuentran en algún deseo de la prensa  ($D = \{x_i \in A / x_i \in B_i\})$. Como la solución no puede contener jugadores que no sean deseados, podríamos acotar mejor la solución a $|S^*| \le |D|$.
 
+También, la solución aproximada buscará satisfacer la mayor cantidad de deseos, por lo que en el peor de los casos, tomará un jugador de cada $B_i$. De esta manera, $|S^*| \le m$.
+
+Podemos concluir que, dado que $|S^*| \le |D|$ y $|S^*| \le m$, la solución aproximada puede alcanzar un tamaño máximo igual al mínimo entre la cantidad de jugadores deseados y la cantidad de deseos. De esta manera, $|S| \le |S^*| \le min(|D|, m)$
+
+Se puede encontrar el resultado de las pruebas empíricas realizadas para corroborar esta cota en la Página 15 de este mismo informe.
 \subsection{Complejidad algorítmica}
 
 La complejidad algorítmica es $O(m^2 * n)$ porque en el peor de los casos se itera dos veces sobre los deseos de prensa, es decir, en el caso de que en cada iteración solo se cumpla un deseo se van a realizar $m$ iteraciones. Dentro de las cuales se itera por todos los deseos restantes y por cada deseo se itera hasta por $n$ jugadores buscando el que mas deseos cumpla sumando $O(n)$ a la complejidad.
 
+\newpage
 \subsection{El algoritmo}
 
 \begin{lstlisting}[language=Python]
@@ -476,10 +469,11 @@ Estos sets de datos nos permitieron realizar las mediciones de los tiempos de ej
 Podemos observar que, a medida que se va aumentando la cantidad de deseos, el tiempo de ejecución del algoritmo de Backtracking aumenta exponencialmente.
 \end{center}
 
+\newpage
 \begin{center}
 \includegraphics[width=0.7\textwidth]{img/tiempo_pl.png}
 
-Podemos observar que, la curva con el algoritmo con Programación Lineal es más gradual que en comparación con la curva del algoritmo de Backtracking.
+Podemos observar que, la curva con el algoritmo con Programación Lineal es significativamente más gradual que en comparación con la curva del algoritmo de Backtracking.
 \end{center}
 
 \begin{center}
@@ -497,7 +491,7 @@ Se puede observar que el algoritmo de aproximación Bilardo reduce significativa
 \begin{center}
 \includegraphics[width=0.7\textwidth]{img/tiempo_greedy.png}
 
-También con este algoritmo de aproximación sucede que, se reduce significativamente el tiempo de ejecución a cambio de obtener una solución que puede diferir de la solución óptima.
+Al igual que con el anterior con este algoritmo de aproximación sucede que, se reduce significativamente el tiempo de ejecución a cambio de obtener una solución que puede diferir de la solución óptima.
 \end{center}
 
 \begin{center}
@@ -509,9 +503,36 @@ Podemos observar como los diferentes algoritmos de aproximación difieren en su 
 \begin{center}
 \includegraphics[width=0.7\textwidth]{img/bilardo_vs_greedy_2.png}
 
-Vemos que el algoritmo de Bilardo siempre devuelve más jugadores según cantidad de deseos a comparación que el algoritmo Greedy, por lo tanto, pareciera ser mas óptimo este último.
+Vemos que para los datos utilizados el algoritmo de Bilardo consistentemente devuelve más jugadores en su resultado comparado con el algoritmo Greedy, por lo tanto, pareciera ser mas óptimo este último.
 \end{center}
 
+\newpage
+\begin{center}
+\includegraphics[width=0.7\textwidth]{img/LPvsBilardo_cota1.png}
+
+Podemos observar el gráfico de las pruebas de volúmenes realizadas para corroborar empíricamente la cota calculada y mencionada en la sección correspondiente al algoritmo de Aproximación de Bilardo, donde b es la cantidad de jugadores del deseo mas grande y r es la división entre el tiempo de aproximar el resultado y calcularlo por programación lineal.
+\end{center}
+
+\begin{center}
+\includegraphics[width=0.7\textwidth]{img/LPvsBilardo_cota2.png}
+
+En este gráfico podemos observar la Distancia entre la cota y la diferencia de aproximación de una manera mas directa, corroborando que en ninguna situación pasa a ser negativa (caso en el que se estaría superando la cota)
+\end{center}
+
+\newpage
+\begin{center}
+\includegraphics[width=0.7\textwidth]{img/LPvsGreedy_cota1.png}
+
+Podemos observar el gráfico de las pruebas de volúmenes realizadas para corroborar empíricamente la cota calculada y mencionada en la sección correspondiente al algoritmo de Aproximación Greedy, donde $b$ es el mínimo entre la cantidad de jugadores deseados y la cantidad de deseos de prensa y r es la división entre el tiempo de aproximar el resultado y calcularlo por programación lineal
+\end{center}
+
+\begin{center}
+\includegraphics[width=0.7\textwidth]{img/LPvsGreedy_cota2.png}
+
+En este gráfico podemos observar la Distancia entre la cota y la diferencia de aproximación de una manera mas directa, corroborando que en ninguna situación pasa a ser negativa (caso en el que se estaría superando la cota)
+\end{center}
+
+\newpage
 \section{Conclusiones}
 
 Podemos concluir que el algoritmo de Programación Lineal nos permitió encontrar una solución óptima evitando explorar un espacio exponencial de soluciones como se hace con el algoritmo de Backtracking, por lo cuál, gracias a esta metodología pudimos reducir significativamente los tiempos de ejecución del algoritmo.
