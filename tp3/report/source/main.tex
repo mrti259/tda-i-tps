@@ -413,7 +413,7 @@ Lo mismo sucedería en el caso que contemos con deseos con la siguiente estructu
 \[\{1,2\}, \{1,2\}, \{1,3\}, \{1,3\}, \{2,4\}, \{3,5\},\]
 \[\{6,7\}, \{6,7\}, \{6,8\}, \{6,8\}, \{7,9\}, \{8,10\},\]
 \[\{11,12\}, \{11,12\}, \{11,13\}, \{11,13\}, \{12,14\}, \{13,15\},\]
-\[\}
+\[\}\]
 
 El resultado del algoritmo Greedy nos devuelve: \{1,6,11,2,3,7,8,12,13\} (9 jugadores), mientras una solución óptima obtenemos \{2,3,7,8,12,13\} (6 jugadores).
 
@@ -540,6 +540,43 @@ Podemos concluir que el algoritmo de Programación Lineal nos permitió encontra
 También encontramos que el algoritmo de aproximación Greedy que implementamos, en promedio, tiene mejor rendimiento que el algoritmo por aproximación Bilardo. Tanto en los tiempos de ejecución como hallando soluciones más próximas a la óptima.
 
 Con grandes sets de datos, obtener la solución óptima requiere aumentar los tiempos de ejecución, por lo cuál, puede ser preferible utilizar un algoritmo de aproximación sabiendo que puede no obtener una solución óptima. 
+
+\newpage
+\section{Anexo}
+\subsection{Corrección sobre la demostración de que Hitting Set es un problema NP-Completo}
+De acuerdo a lo indicado por el Ingeniero Martín Buchwald en \href{https://github.com/mrti259/tda-i-tps/issues/2#issuecomment-1858235695}{este issue} la justificación propuesta de que Hitting-Set es un problema NP-Completo era insuficiente. En base a esto se revisó el documento y se identificó que efectivamente la reducción propuesta no limitaba correctamente el Hitting-Set y podía responder que el problema original era satisfacible en situaciones donde no lo era. Como corrección se propone la siguiente reducción:
+
+Dada una instancia de 3-SAT con $m$ cláusulas y $n$ variables, construimos una fórmula booleana \(F\) para Hitting-Set Problem de la siguiente manera:
+
+\begin{itemize}
+    \item Cada variable en F se convierte en un elemento único en el conjunto universal \(X\).
+    \[X = \{x_1, \overline{x_1}, ..., x_n, \overline{x_n}\}\]
+    
+    \item Cada variable en F se convierte en un subconjunto en \(X_i\) que incluye a dicha variable y su complemento.
+    \[X_i = \{x_i, \overline{x_i}\} \subseteq X\]
+    
+    \item Cada cláusula en F se convierte en un subconjunto \(Y_i \subseteq X\).
+    \[Y_i = \{y_1, y_2, y_3\} \forall y_1, y_2, y_3 \in X \text{ y } (y_1 \lor y_2 \lor y_3) \text{ es una cláusula de F} \]
+\end{itemize}
+
+Entonces, para resolver 3-SAT, necesitamos encontrar un conjunto \(S\) tal que:
+
+\begin{itemize} 
+    \item \(S \cap X_i \neq \emptyset \forall X_i \subseteq X\), porque tiene que asignarle un valor positivo o negativo a cada una de las variables.
+    \item \(S \cap Y_i \neq \emptyset \forall Y_i \subseteq X\), porque debe asignarle un valor positivo a, por lo menos, un literal de cada cláusula.
+    \item \(|S| = n\), para que sólo incluya un literal de cada $C_i \subseteq X$.
+\end{itemize}
+
+Por lo tanto, buscaremos encontrar una solución $S$ que cumpla con las condiciones de Hitting Set mencionadas anteriormente donde: 
+
+\begin{itemize} 
+    \item \textit{Tamaño del conjunto:} $|S| \leq k = n$.
+    \item \textit{Intersección con cada $B_i$:} $S \cap B_i \neq \emptyset \forall B_i \subseteq X_i \cup Y_i$.
+\end{itemize}
+
+Esta construcción asegura que, si existe un conjunto de literales verdaderas que satisface todas las cláusulas en 3-SAT, entonces el conjunto correspondiente en Hitting Set seleccionará los conjuntos asociados a esas literales. Por otro lado, si no hay una solución para 3-SAT, entonces no hay un conjunto en Hitting Set que cubra todos los conjuntos en $B_i$ con las restricciones impuestas.
+
+Esta reducción se puede realizar en tiempo polinómico, y por lo tanto, demuestra que Hitting Set es NP-completo.
 
 \end{document}
 
