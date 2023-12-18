@@ -549,29 +549,29 @@ De acuerdo a lo indicado por el Ingeniero Martín Buchwald en \href{https://gith
 Dada una instancia de 3-SAT con $m$ cláusulas y $n$ variables, construimos una fórmula booleana \(F\) para Hitting-Set Problem de la siguiente manera:
 
 \begin{itemize}
-    \item Cada variable en F se convierte en un elemento único en el conjunto universal \(X\).
+    \item Cada variable en $F$ se convierte en un elemento único en el conjunto universal \(X\).
     \[X = \{x_1, \overline{x_1}, ..., x_n, \overline{x_n}\}\]
     
-    \item Cada variable en F se convierte en un subconjunto en \(X_i\) que incluye a dicha variable y su complemento.
+    \item Por cada variable en $F$ se crea un subconjunto en \(X_i\) que incluye a dicha variable y su complemento.
     \[X_i = \{x_i, \overline{x_i}\} \subseteq X\]
     
-    \item Cada cláusula en F se convierte en un subconjunto \(Y_i \subseteq X\).
-    \[Y_i = \{y_1, y_2, y_3\} \forall y_1, y_2, y_3 \in X \text{ y } (y_1 \lor y_2 \lor y_3) \text{ es una cláusula de F} \]
+    \item Cada cláusula en $F$ se convierte en un subconjunto \(Y_i \subseteq X\).
+    \[Y_i = \{y_1, y_2, y_3\} \quad \forall y_1, y_2, y_3 \in X \text{ y } (y_1 \lor y_2 \lor y_3) \text{ es una cláusula de F} \]
 \end{itemize}
 
 Entonces, para resolver 3-SAT, necesitamos encontrar un conjunto \(S\) tal que:
 
 \begin{itemize} 
-    \item \(S \cap X_i \neq \emptyset \forall X_i \subseteq X\), porque tiene que asignarle un valor positivo o negativo a cada una de las variables.
-    \item \(S \cap Y_i \neq \emptyset \forall Y_i \subseteq X\), porque debe asignarle un valor positivo a, por lo menos, un literal de cada cláusula.
-    \item \(|S| = n\), para que sólo incluya un literal de cada $C_i \subseteq X$.
+    \item \(S \cap X_i \neq \emptyset \quad \forall X_i \subseteq X\), porque tiene que asignarle un valor positivo o negativo a cada una de las variables.
+    \item \(S \cap Y_i \neq \emptyset \quad \forall Y_i \subseteq X\), porque debe asignarle un valor positivo a, por lo menos, un literal de cada cláusula.
+    \item \(|S| = n\), para que sólo incluya un literal de cada $X_i \subseteq X$.
 \end{itemize}
 
 Por lo tanto, buscaremos encontrar una solución $S$ que cumpla con las condiciones de Hitting Set mencionadas anteriormente donde: 
 
 \begin{itemize} 
-    \item \textit{Tamaño del conjunto:} $|S| \leq k = n$.
-    \item \textit{Intersección con cada $B_i$:} $S \cap B_i \neq \emptyset \forall B_i \subseteq X_i \cup Y_i$.
+    \item \textit{Tamaño del conjunto:} \quad $|S| \leq k = n$.
+    \item \textit{Intersección con cada $B_i$:} \quad $S \cap X_i \neq \emptyset \land S \cap Y_i \neq \emptyset$ \quad $(B_i \in \{X_1, ... X_n, Y_1, ..., Y_m\})$.
 \end{itemize}
 
 Esta construcción asegura que, si existe un conjunto de literales verdaderas que satisface todas las cláusulas en 3-SAT, entonces el conjunto correspondiente en Hitting Set seleccionará los conjuntos asociados a esas literales. Por otro lado, si no hay una solución para 3-SAT, entonces no hay un conjunto en Hitting Set que cubra todos los conjuntos en $B_i$ con las restricciones impuestas.
